@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+       spacing: {
+        safe: 'env(safe-area-inset-bottom)',
+      },
       fontFamily: {
         body: ['Lexend', 'sans-serif'],
         headline: ['Lexend', 'sans-serif'],
