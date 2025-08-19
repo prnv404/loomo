@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 export const metadata: Metadata = {
   title: 'LOOMO',
   description: 'Premium men`s clothing POS and inventory management.',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
