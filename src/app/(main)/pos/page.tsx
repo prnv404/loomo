@@ -37,6 +37,8 @@ export default function POSPage() {
   const [isScanning, setIsScanning] = useState(false);
   const { toast } = useToast();
   const pathname = usePathname();
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [customerName, setCustomerName] = useState('');
 
   useEffect(() => {
     // Pre-populate bill with some items
@@ -284,16 +286,20 @@ export default function POSPage() {
                     <span>Total:</span>
                     <span>₹{total.toFixed(2)}</span>
                 </div>
-                <div>
-                    <Label>Customer Phone (Optional)</Label>
-                    <Input placeholder="+91-987-654-3210" />
+                <div className="space-y-2">
+                    <Label htmlFor="customerPhone">Customer Phone (Required)</Label>
+                    <Input id="customerPhone" type="tel" inputMode="numeric" placeholder="+91-987-654-3210" required value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} />
                 </div>
-                <div className="flex flex-col sm:flex-row gap-2 w-full">
-                    <Button className="w-full" size="lg">Generate Bill</Button>
-                    <div className="grid grid-cols-2 gap-2 w-full sm:w-auto">
-                        <Button variant="outline" className="w-full"><Bot className="mr-2 h-4 w-4" /> WhatsApp</Button>
-                        <Button variant="outline" className="w-full"><MessageSquare className="mr-2 h-4 w-4" /> SMS</Button>
+                <div className="space-y-2">
+                    <Label htmlFor="customerName">Customer Name (Optional)</Label>
+                    <Input id="customerName" placeholder="John Doe" value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                    <div className="grid grid-cols-2 gap-2 w-full">
+                        <Button variant="outline" className="w-full" disabled={!customerPhone}><Bot className="mr-2 h-4 w-4" /> WhatsApp</Button>
+                        <Button variant="outline" className="w-full" disabled={!customerPhone}><MessageSquare className="mr-2 h-4 w-4" /> SMS</Button>
                     </div>
+                     <Button className="w-full" size="lg" disabled={!customerPhone}>Generate Bill</Button>
                 </div>
                 </div>
             </CardContent>

@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import { LoomoLogo } from '@/components/logo';
 
 const navItems = [
   { href: '/', icon: Home, label: 'Dashboard' },
@@ -34,8 +35,9 @@ export default function MainLayout({
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:px-6">
-        <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold tracking-tight">LOOMO</h1>
+        <div className="flex items-center gap-2">
+            <LoomoLogo className="h-6 w-6" />
+          <h1 className="text-lg font-bold tracking-tight">LOOMO</h1>
         </div>
 
         <div className="relative ml-auto flex items-center gap-2 md:grow-0">
@@ -45,10 +47,10 @@ export default function MainLayout({
               <Button
                 variant="outline"
                 size="icon"
-                className="overflow-hidden rounded-full"
+                className="overflow-hidden rounded-full w-8 h-8"
               >
-                <Avatar>
-                  <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="male portrait" />
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src="https://placehold.co/32x32.png" alt="User" data-ai-hint="male portrait" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               </Button>
@@ -65,18 +67,18 @@ export default function MainLayout({
         </div>
       </header>
       <div className="flex flex-1">
-        <main className="flex-1 items-start gap-4 p-4 sm:px-6 md:gap-8 pb-24">
+        <main className="flex-1 items-start gap-4 p-2 sm:px-4 md:gap-4 pb-20 sm:pb-4">
             {children}
         </main>
       </div>
-       <nav className="fixed bottom-0 left-0 right-0 z-10 border-t bg-card text-card-foreground">
-          <div className="mx-auto grid max-w-screen-sm h-16 grid-cols-4 items-center justify-center gap-2 px-2 pb-safe">
+       <nav className="fixed bottom-0 left-0 right-0 z-10 border-t bg-card text-card-foreground sm:hidden">
+          <div className="mx-auto grid max-w-screen-sm h-16 grid-cols-4 items-center justify-center gap-2 px-2" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
             {navItems.map((item) => (
                 <Link
                 key={item.label}
                 href={item.href}
                 className={`flex flex-col items-center justify-center rounded-lg p-2 text-xs transition-colors ${
-                    pathname === item.href || (item.href === '/more' && ['/customers', '/marketing', '/inventory'].includes(pathname))
+                    pathname === item.href || (item.href === '/more' && ['/customers', '/marketing', '/inventory', '/accounts'].includes(pathname))
                     ? 'bg-accent text-accent-foreground'
                     : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground'
                 }`}
